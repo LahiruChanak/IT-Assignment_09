@@ -87,6 +87,7 @@ button {
 
 th {
   font-size: 0.9rem;
+  min-width: 85px;
 }
 
 td {
@@ -164,4 +165,8 @@ td {
   .purchase-btn {
     width: 100%;
   }
+}
+
+.line-graph {
+  width: 90%;
 }

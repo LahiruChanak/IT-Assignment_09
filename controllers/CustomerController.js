@@ -1,13 +1,6 @@
 initializeNextCustomerId();
 loadAllCustomers();
-
-//========================================================================================
-/*                               Validations & Form Control                             */
-//========================================================================================
-
-//========================================================================================
-/*                                 Other Functions                                      */
-//========================================================================================
+loadCount();
 
 function initializeNextCustomerId() {
   // Initialize Customer ID in New Customer
@@ -96,7 +89,7 @@ $("#save-customer").on("submit", function (event) {
       initializeNextCustomerId();
       sortCustomerDatabaseById();
       loadAllCustomers();
-      loadCustomerCount();
+      loadCount();
       initializeOrderComboBoxes();
     } else {
       showToast("error", "Customer ID already exists !");
@@ -220,7 +213,7 @@ $("#delete-customer-btn").on("click", function () {
       showToast("success", "Customer deleted successfully!");
       $("#confirm-delete-model").modal("hide"); // Hide modal after deletion
       loadAllCustomers();
-      loadCustomerCount();
+      loadCount();
       initializeOrderComboBoxes();
     });
   } else if (customers && !Array.isArray(customers)) {
@@ -237,7 +230,7 @@ $("#delete-customer-btn").on("click", function () {
       showToast("success", "Customer deleted successfully!");
       $("#confirm-delete-model").modal("hide");
       loadAllCustomers();
-      loadCustomerCount();
+      loadCount();
       initializeOrderComboBoxes();
     });
   } else {

@@ -6,6 +6,7 @@
     <title>POS System</title>
     <link rel="icon" href="/assets/images/posLogo.png" />
 
+    <!-- Font Awesome, Bootstrap, Google Icon and Chart.js CDN -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -18,6 +19,10 @@
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
 
     <link rel="stylesheet" href="/assets/css/style.css" />
@@ -97,7 +102,7 @@
           <div class="row content p-1 m-auto">
             <div class="col-lg-12 px-0 py-3 px-lg-3">
               <div class="row justify-content-center">
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6">
                   <div class="card text-white bg-primary ps-2 mb-4">
                     <div class="card-body d-flex align-items-center gap-4">
                       <i class="fa-solid fa-users fs-1"></i>
@@ -113,7 +118,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6">
                   <div class="card text-white bg-success ps-2 mb-4">
                     <div class="card-body d-flex align-items-center gap-4">
                       <i class="fa-solid fa-box fs-1"></i>
@@ -126,7 +131,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-lg-3 col-md-4 col-sm-6">
                   <div class="card text-white bg-warning ps-2 mb-4">
                     <div class="card-body d-flex align-items-center gap-4">
                       <i class="fa-solid fa-cart-shopping fs-1"></i>
@@ -141,6 +146,12 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="container-fluid line-graph">
+            <h3 class="text-center mb-4">Order Sales Line Graph</h3>
+
+            <!-- Line Graph -->
+            <canvas id="salesChart"></canvas>
           </div>
         </div>
       </section>
@@ -480,15 +491,15 @@
           <div class="row content p-1 m-auto">
             <div class="col-lg-12 px-0 py-3 px-lg-3">
               <div class="row m-auto">
-                <div class="col-lg-6">
+                <div class="col-lg-6 border rounded-3 p-0 border-dark-subtle">
                   <h2
-                    class="fw-normal fs-5 ps-3 p-2 m-0 w-100 bg-success text-light"
+                    class="fw-normal fs-5 ps-3 p-2 m-0 w-100 bg-success text-light rounded-top-2"
                   >
                     Item Search
                   </h2>
-                  <div class="search bg-light p-3">
+                  <div class="search bg-light rounded-bottom-3 px-2 py-4">
                     <form id="search-item" class="px-2" action="search">
-                      <div class="mb-3">
+                      <div class="mb-1">
                         <input
                           type="text"
                           id="txt-search-valuei"
@@ -498,16 +509,16 @@
                         <div class="invalid-feedback error-bg">
                           Please enter a valid Code or Name
                         </div>
-                        <div class="d-flex mt-3">
+                        <div class="d-flex gap-1 mt-3">
                           <button
                             type="submit"
-                            class="btn btn-success rounded-1"
+                            class="btn btn-success px-3 rounded-1"
                           >
                             Search
                           </button>
                           <select
                             id="search-item-by"
-                            class="form-select ms-2 w-25 border-1 border-dark-subtle rounded-1"
+                            class="form-select ms-2 w-auto border-1 border-dark-subtle rounded-1"
                           >
                             <option>Code</option>
                             <option>Name</option>
@@ -517,10 +528,10 @@
                     </form>
                   </div>
                 </div>
-                <div
-                  class="col-lg-6 pt-3 pt-lg-0 d-flex justify-content-lg-end justify-content-center"
-                >
-                  <div class="w-75">
+                <div class="col-md-6 pt-4 d-flex justify-content-center">
+                  <div
+                    class="w-75 d-flex justify-content-center flex-column gap-2"
+                  >
                     <button
                       class="btn btn-info px-4 rounded-1 w-100 mb-1"
                       data-bs-toggle="modal"
@@ -540,7 +551,7 @@
               <div class="row button-set m-auto">
                 <div class="col-12 px-3">
                   <div
-                    class="p-lg-3 py-3 d-flex justify-content-lg-start justify-content-center gap-1"
+                    class="p-md-3 py-3 d-flex justify-content-md-start justify-content-center flex-wrap gap-1"
                   >
                     <button
                       id="delete-item-btn"
@@ -564,41 +575,21 @@
                   </div>
                 </div>
               </div>
-              <div class="row table-content m-auto">
+              <div class="row table-content mt-4 m-auto">
                 <div class="col-12">
                   <div class="table-responsive text-center">
                     <table class="table table-hover">
-                      <thead class="table-success">
+                      <thead>
                         <tr>
-                          <th
-                            class="border-1 border-success-subtle"
-                            style="width: 20%"
-                          >
-                            Item Code
-                          </th>
-                          <th
-                            class="border-1 border-success-subtle"
-                            style="width: 30%"
-                          >
-                            Name
-                          </th>
-                          <th
-                            class="border-1 border-success-subtle"
-                            style="width: 30%"
-                          >
-                            Quantity
-                          </th>
-                          <th
-                            class="border-1 border-success-subtle"
-                            style="width: 20%"
-                          >
-                            Unit Price
-                          </th>
+                          <th scope="col">Item Code</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Unit Price</th>
                         </tr>
                       </thead>
                       <tbody
                         id="item-tbody"
-                        class="border-1 border-success-subtle"
+                        class="table-group-divider"
                       ></tbody>
                     </table>
                   </div>
@@ -1315,45 +1306,54 @@
 
     <footer>
       <div class="container-fluid bg-secondary-subtle pt-4">
-        <div class="row mx-auto">
-          <div class="col-lg-6 mb-3 ps-5 ms-5">
-            <div class="d-flex align-items-center mb-3">
-              <img
-                src="/assets/images/posLogo.png"
-                alt="POS Logo"
-                width="40"
-                class="me-2"
-              />
-              <h5 class="logo mb-0">POS System</h5>
+        <div class="container">
+          <div class="row justify-content-between flex-wrap gap-2">
+            <!-- Logo and Description Section -->
+            <div
+              class="col-lg-5 col-md-4 ms-lg-5 d-flex flex-column justify-content-center align-items-start"
+            >
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="/assets/images/posLogo.png"
+                  alt="POS Logo"
+                  width="40"
+                  class="me-2"
+                />
+                <h5 class="logo mb-0">POS System</h5>
+              </div>
+              <p class="text-muted small">
+                Your complete point of sale solution for modern business
+                management.
+              </p>
             </div>
-            <p class="text-muted small ps-2">
-              Your complete point of sale solution for modern business
-              management.
+
+            <!-- Social Media Section -->
+            <div
+              class="col-lg-5 col-md-4 mb-sm-2 d-flex flex-column justify-content-center align-items-center"
+            >
+              <h6 class="fw-bold text-success">Connect With Us</h6>
+              <div class="d-flex gap-3">
+                <a href="#" class="text-success fs-4">
+                  <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="#" class="text-success fs-4">
+                  <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="#" class="text-success fs-4">
+                  <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="#" class="text-success fs-4">
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Copyright Section -->
+          <div class="border-top border-success py-3 mt-3">
+            <p class="text-center text-muted small mb-0">
+              ©Copyright 2024 POS-System. All Rights Reserved.
             </p>
           </div>
-
-          <div class="col-lg-5 ps-5 ms-5 pt-2">
-            <h6 class="fw-bold text-success">Connect With Us</h6>
-            <div class="d-flex gap-3 mb-3">
-              <a href="#" class="text-success"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a href="#" class="text-success"
-                ><i class="fab fa-twitter"></i
-              ></a>
-              <a href="#" class="text-success"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
-              <a href="#" class="text-success"
-                ><i class="fab fa-instagram"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div class="border-top border-success py-3">
-          <p class="text-center text-muted small mb-0">
-            ©Copyright 2024 POS-System. All Rights Reserved.
-          </p>
         </div>
       </div>
     </footer>
@@ -1366,43 +1366,9 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script src="/util/ScriptLoader.js"></script>
-
-    <script>
-      let currentSection = "home";
-      const activeLink = document.querySelectorAll("#nav-bar .nav-link");
-
-      function logout() {
-        window.location.href = "/indexLogin.html";
-      }
-
-      function showSection(section) {
-        document.getElementById(currentSection).classList.add("hide");
-        document.getElementById(section).classList.remove("hide");
-
-        activeLink.forEach((link) => link.classList.remove("active"));
-        document
-          .querySelector(
-            `#nav-bar .nav-item[onclick="showSection('${section}')"] .nav-link`
-          )
-          .classList.add("active");
-
-        currentSection = section;
-
-        collapseNavbar();
-      }
-
-      function collapseNavbar() {
-        const navbarCollapse = document.getElementById("navbarNav");
-        if (navbarCollapse.classList.contains("show")) {
-          navbarCollapse.classList.remove("show");
-        }
-      }
-
-      window.onload = () => {
-        showSection(currentSection);
-        initializeNextCustomerId();
-      };
-    </script>
+    <script src="/util/SalesChart.js"></script>
   </body>
 </html>

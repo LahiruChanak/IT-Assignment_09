@@ -1,4 +1,4 @@
-function loadCounts() {
+function loadCount() {
   const customerCount = customerDatabase.length.toString();
   $("#customerCount").text(customerCount);
 
@@ -8,5 +8,3 @@ function loadCounts() {
   const orderCount = orderDatabase.length.toString();
   $("#orderCount").text(orderCount);
 }
-
-loadCounts();

@@ -17,7 +17,7 @@ loadScript("/models/Order.js");
 loadScript("/models/OrderDetail.js");
 loadScript("/models/Item.js");
 loadScript("/controllers/IndexController.js");
-loadScript("/controllers/HomeController.js");
+loadScript("/controllers/HomepageController.js");
 loadScript("/controllers/CustomerController.js");
 loadScript("/controllers/OrderController.js");
 loadScript("/controllers/ItemController.js");
