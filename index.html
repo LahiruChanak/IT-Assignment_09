@@ -795,430 +795,258 @@
       </section>
 
       <!-- Orders Section -->
-      <section id="orders" class="hide">
-        <div class="container-fluid px-lg-5 my-4">
-          <div class="row label p-2 m-auto">
-            <div class="col-lg-12">
-              <h1 class="fw-medium text-start my-auto">
-                <i class="fa-solid fa-cart-shopping"></i>
-                Orders
-              </h1>
+      <section class="hide" id="orders">
+        <div class="container-fluid px-lg-5 my-5">
+          <div class="row g-4">
+            <!-- Invoice Details Section -->
+            <div class="col-lg-4">
+              <div class="card h-100 shadow-sm">
+                <div class="card-header bg-success text-white fs-5">
+                  Invoice Details
+                </div>
+                <div class="card-body">
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <label class="form-label">Order ID:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="txt-order-id"
+                        pattern="^O[0-9]{3,}$"
+                      />
+                      <div class="invalid-feedback error-bg">
+                        Enter a valid ID
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label">Date:</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="txt-order-date"
+                      />
+                      <div class="invalid-feedback error-bg">
+                        Enter a valid Date
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <label class="form-label">Customer:</label>
+                      <select
+                        id="select-customer-id"
+                        class="form-select border-1 border-dark-subtle rounded-1"
+                      >
+                        <option value="">Select Customer</option>
+                      </select>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label">Customer ID:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="txt-customer-id"
+                        pattern="^C[0-9]{3,}$"
+                      />
+                      <div class="invalid-feedback error-bg">
+                        Enter a valid Customer ID
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <label class="form-label">Name:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="txt-customer-name"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label">Contact:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="txt-customer-cno"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Address:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="txt-customer-address"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="row content p-1 m-auto">
-            <div class="col-lg-12 px-0 py-3 px-lg-3">
-              <div class="row m-auto">
-                <div class="col-lg-5">
-                  <h2
-                    class="fw-normal fs-5 ps-3 p-2 m-0 w-100 bg-success text-light"
-                  >
-                    Order Search / Invoice Details
-                  </h2>
-                  <div
-                    class="search bg-light p-3 position-relative order-search-box"
-                  >
-                    <form id="search-order" class="px-2" action="search">
-                      <div class="d-flex mb-4 mt-3">
-                        <div class="w-100 d-flex flex-column">
-                          <input
-                            type="text"
-                            class="form-control border-1 border-dark-subtle rounded-1"
-                            placeholder="Input Order ID Here"
-                            pattern="^O[0-9]{3,}$"
-                          />
-                          <div class="invalid-feedback error-bg">
-                            Order ID is required [ Pattern : O00X ]
-                          </div>
-                        </div>
-                        <div class="ms-2">
-                          <button
-                            type="submit"
-                            class="btn btn-success rounded-1"
-                          >
-                            Search
-                          </button>
-                        </div>
+
+            <!-- Item Select Section -->
+            <div class="col-lg-4">
+              <div class="card h-100 shadow-sm">
+                <div class="card-header bg-success text-white fs-5">
+                  Item Select
+                </div>
+                <div class="card-body d-flex flex-column">
+                  <div class="item-select-content">
+                    <div class="row mb-3">
+                      <div class="col-6">
+                        <label class="form-label">Item:</label>
+                        <select class="form-select" id="select-item-code">
+                          <option value="">Select Item</option>
+                        </select>
                       </div>
-                    </form>
-                    <form id="invoice-details" class="px-2 mt-4">
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-lg-6">
-                            <label
-                              for="txt-order-id"
-                              class="form-label fw-bold m-1"
-                              >Order ID:</label
-                            >
-                            <input
-                              type="text"
-                              id="txt-order-id"
-                              class="form-control border-1 border-dark-subtle rounded-1"
-                              pattern="^O[0-9]{3,}$"
-                            />
-                            <div class="invalid-feedback error-bg">
-                              Enter a valid ID
-                            </div>
-                          </div>
-                          <div class="col-lg-6">
-                            <label
-                              for="txt-order-date"
-                              class="form-label fw-bold m-1"
-                              >Date:</label
-                            >
-                            <input
-                              type="date"
-                              id="txt-order-date"
-                              class="form-control border-1 border-dark-subtle rounded-1"
-                            />
-                            <div class="invalid-feedback error-bg">
-                              Enter a valid Date
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-lg-6">
-                            <label
-                              for="select-customer-id"
-                              class="form-label fw-bold m-1"
-                              >Customer:</label
-                            >
-                            <select
-                              id="select-customer-id"
-                              class="form-select border-1 border-dark-subtle rounded-1"
-                            >
-                              <option value="">Select</option>
-                            </select>
-                          </div>
-                          <div class="col-lg-6">
-                            <label
-                              for="txt-customer-id"
-                              class="form-label fw-bold m-1"
-                              >Customer ID:</label
-                            >
-                            <input
-                              id="txt-customer-id"
-                              type="text"
-                              class="form-control border-1 border-dark-subtle rounded-1"
-                              pattern="^C[0-9]{3,}$"
-                            />
-                            <div class="invalid-feedback error-bg">
-                              Enter a valid ID
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-lg-6">
-                            <label
-                              for="txt-customer-name"
-                              class="form-label fw-bold m-1"
-                              >Name:</label
-                            >
-                            <input
-                              id="txt-customer-name"
-                              type="text"
-                              class="form-control border-1 border-dark-subtle rounded-1"
-                              readonly
-                            />
-                          </div>
-                          <div class="col-lg-6">
-                            <label
-                              for="txt-customer-cno"
-                              class="form-label fw-bold m-1"
-                              >Contact No:</label
-                            >
-                            <input
-                              id="txt-customer-cno"
-                              type="text"
-                              class="form-control border-1 border-dark-subtle rounded-1"
-                              readonly
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group mb-5 pb-3">
-                        <label
-                          for="txt-customer-address"
-                          class="form-label fw-bold m-1"
-                          >Address:</label
-                        >
+                      <div class="col-6">
+                        <label class="form-label">Item Code:</label>
                         <input
-                          id="txt-customer-address"
                           type="text"
-                          class="form-control border-1 border-dark-subtle rounded-1"
+                          class="form-control"
+                          id="txt-item-code"
+                          pattern="^I[0-9]{3,}$"
+                        />
+                        <div class="invalid-feedback error-bg">
+                          Enter a valid Item Code
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-6">
+                        <label class="form-label">Item Name:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txt-item-name"
                           readonly
                         />
                       </div>
-                      <div class="button-set order-btns mb-3 d-flex gap-1">
-                        <button
-                          id="delete-order-btn"
-                          class="btn btn-danger px-4 rounded-1"
-                        >
-                          Delete
-                        </button>
-                        <button
-                          id="update-order-btn"
-                          class="btn btn-info text-white px-4 rounded-1"
-                        >
-                          Update
-                        </button>
-                        <button
-                          id="clear-order-btn"
-                          class="btn btn-success px-4 rounded-1"
-                        >
-                          Clear
-                        </button>
+                      <div class="col-3">
+                        <label class="form-label">Price:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txt-item-price"
+                          readonly
+                        />
                       </div>
-                    </form>
-                  </div>
-                </div>
-                <div class="col-lg-7 pt-3 pt-lg-0">
-                  <div class="row m-auto">
-                    <h2
-                      class="fw-normal fs-5 ps-3 p-2 m-0 w-100 bg-success text-light"
-                    >
-                      Item Select
-                    </h2>
-                    <div
-                      class="search bg-light p-3"
-                      style="min-height: 390px !important"
-                    >
-                      <form id="item-select" class="px-2">
-                        <div class="form-group">
-                          <div class="row">
-                            <div class="col-lg-6">
-                              <label
-                                for="select-item-code"
-                                class="form-label fw-bold m-1"
-                                >Item:</label
-                              >
-                              <select
-                                id="select-item-code"
-                                class="form-select border-1 border-dark-subtle rounded-1"
-                              >
-                                <option value="">Select</option>
-                              </select>
-                            </div>
-                            <div class="col-lg-6">
-                              <label
-                                for="txt-item-code"
-                                class="form-label fw-bold m-1"
-                                >Item ID:</label
-                              >
-                              <input
-                                id="txt-item-code"
-                                type="text"
-                                class="form-control border-1 border-dark-subtle rounded-1"
-                                pattern="^I[0-9]{3,}$"
-                              />
-                              <div class="invalid-feedback error-bg">
-                                Enter a valid Item ID
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <div class="row">
-                            <div class="col-lg-4">
-                              <label
-                                for="txt-item-name"
-                                class="form-label fw-bold m-1"
-                                >Name:</label
-                              >
-                              <input
-                                id="txt-item-name"
-                                type="text"
-                                class="form-control border-1 border-dark-subtle rounded-1"
-                                readonly
-                              />
-                            </div>
-                            <div class="col-lg-4">
-                              <label
-                                for="txt-item-price"
-                                class="form-label fw-bold m-1"
-                                >Price (Rs.):</label
-                              >
-                              <input
-                                id="txt-item-price"
-                                type="text"
-                                class="form-control border-1 border-dark-subtle rounded-1"
-                                readonly
-                              />
-                            </div>
-                            <div class="col-lg-4">
-                              <label
-                                for="txt-item-qty"
-                                class="form-label fw-bold m-1"
-                                >QtyOnHand:</label
-                              >
-                              <input
-                                id="txt-item-qty"
-                                type="text"
-                                class="form-control border-1 border-dark-subtle rounded-1"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <div class="row">
-                            <div class="col-lg-8 mb-3 mb-lg-0">
-                              <label
-                                for="txt-order-qty"
-                                class="form-label fw-bold m-1"
-                                >Order Quantity:</label
-                              >
-                              <input
-                                id="txt-order-qty"
-                                type="number"
-                                class="form-control border-1 border-dark-subtle rounded-1"
-                                pattern="^[1-9][0-9]*$"
-                              />
-                              <div class="invalid-feedback error-bg">
-                                Enter a valid Quantity
-                              </div>
-                            </div>
-                            <div
-                              class="col-lg-4 mt-3 mt-lg-0 d-flex align-items-start"
-                            >
-                              <button
-                                type="submit"
-                                id="add-item-btn"
-                                class="btn btn-danger rounded-1 w-100"
-                              >
-                                Add Item
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
+                      <div class="col-3">
+                        <label class="form-label">Qty/Unit:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txt-item-qty"
+                          readonly
+                        />
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Order Quantity:</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="txt-order-qty"
+                        pattern="^[1-9][0-9]*$"
+                      />
+                      <div class="invalid-feedback error-bg">
+                        Enter a valid Quantity
+                      </div>
                     </div>
                   </div>
-                  <div class="row pt-3 m-auto">
-                    <div
-                      class="purchase bg-light position-relative p-3"
-                      style="min-height: 390px !important"
+                  <div class="d-flex justify-content-end">
+                    <button
+                      type="submit"
+                      class="btn btn-danger w-auto mt-auto"
+                      id="add-item-btn"
                     >
-                      <h3 class="text-primary">Total: 0Rs/=</h3>
-                      <h4 class="text-danger mb-5">SubTotal: 0Rs/=</h4>
-                      <form id="order-payment">
-                        <div class="form-group">
-                          <div class="row">
-                            <div class="col-lg-4">
-                              <label
-                                for="txt-order-cash"
-                                class="form-label fw-bold m-1"
-                                >Cash (Rs.):</label
-                              >
-                              <input
-                                id="txt-order-cash"
-                                type="number"
-                                class="form-control border-1 border-dark-subtle rounded-1"
-                                pattern="^\d+(\.\d{1,2})?$"
-                              />
-                              <div class="invalid-feedback error-bg">
-                                Enter a valid Price
-                              </div>
-                            </div>
-                            <div class="col-lg-4">
-                              <label
-                                for="txt-order-discount"
-                                class="form-label fw-bold m-1"
-                                >Discount (%):</label
-                              >
-                              <input
-                                id="txt-order-discount"
-                                type="number"
-                                class="form-control border-1 border-dark-subtle rounded-1"
-                                pattern="^(?:100(?:\.0{1,2})?|\d{1,2}(?:\.\d{1,2})?)$"
-                              />
-                              <div class="invalid-feedback error-bg">
-                                Enter a valid Discount
-                              </div>
-                            </div>
-                            <div class="col-lg-4 mb-3">
-                              <label
-                                for="txt-order-balance"
-                                class="form-label fw-bold m-1"
-                                >Balance (Rs.):</label
-                              >
-                              <input
-                                id="txt-order-balance"
-                                type="text"
-                                class="form-control border-1 border-dark-subtle rounded-1"
-                                readonly
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <button
-                          type="button"
-                          id="order-purchase-btn"
-                          class="btn btn-success my-3 purchase-btn"
-                        >
-                          Purchase
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row table-content mt-3 m-auto">
-                <div class="col-12">
-                  <div class="table-responsive text-center">
-                    <table class="table table-hover">
-                      <thead class="table-success">
-                        <tr>
-                          <th
-                            class="border-1 border-success-subtle"
-                            style="width: 15%"
-                          >
-                            Item Code
-                          </th>
-                          <th
-                            class="border-1 border-success-subtle"
-                            style="width: 25%"
-                          >
-                            Name
-                          </th>
-                          <th
-                            class="border-1 border-success-subtle"
-                            style="width: 15%"
-                          >
-                            Unit Price
-                          </th>
-                          <th
-                            class="border-1 border-success-subtle"
-                            style="width: 15%"
-                          >
-                            Quantity
-                          </th>
-                          <th
-                            class="border-1 border-success-subtle"
-                            style="width: 15%"
-                          >
-                            Total
-                          </th>
-                          <th
-                            class="border-1 border-success-subtle"
-                            style="width: 15%"
-                          >
-                            Action
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody
-                        id="order-detail-tbody"
-                        class="border-1 border-success-subtle"
-                      ></tbody>
-                    </table>
+                      Add Item
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+
+            <!-- Total Details Section -->
+            <div class="col-lg-4">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+                  <div class="bg-light p-4 rounded mb-3">
+                    <h5 class="mb-2 text-primary fs-4 mb-3">Total: Rs. 0/=</h5>
+                    <h5 class="mb-0 text-danger fs-4">Sub Total: Rs. 0/=</h5>
+                  </div>
+                  <div class="bg-light p-3 rounded mt-auto">
+                    <div class="row mb-3">
+                      <div class="col-6">
+                        <label class="form-label">Cash:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txt-order-cash"
+                          pattern="^\d+(\.\d{1,2})?$"
+                        />
+                        <div class="invalid-feedback error-bg">
+                          Enter a valid Amount
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label class="form-label">Discount:</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="txt-order-discount"
+                          pattern="^(?:100(?:\.0{1,2})?|\d{1,2}(?:\.\d{1,2})?)$"
+                        />
+                        <div class="invalid-feedback error-bg">
+                          Enter a valid Discount
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-12">
+                        <label class="form-label">Balance:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txt-order-balance"
+                          readonly
+                        />
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <button
+                        class="btn btn-success w-auto"
+                        id="order-purchase-btn"
+                      >
+                        Purchase
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table Section -->
+          <div class="container-fluid mt-5 item-table">
+            <table class="table table-hover mb-0 text-center table-responsive">
+              <thead>
+                <tr>
+                  <th scope="col">Item Code</th>
+                  <th scope="col">Item Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody
+                class="table-group-divider"
+                id="order-detail-tbody"
+              ></tbody>
+            </table>
           </div>
         </div>
       </section>
