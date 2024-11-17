@@ -1,3 +1,4 @@
+// Load script dynamically
 function loadScript(url, defer = true) {
   const script = $("<script>", {
     src: url,
