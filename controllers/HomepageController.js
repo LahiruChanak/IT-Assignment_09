@@ -1,5 +1,5 @@
-// Customer Count
-function customerCount() {
+// Load the customer and item counts
+function loadCount() {
   const customerCount = customerDatabase.length.toString();
   $("#customerCount").text(customerCount);
 
@@ -7,7 +7,7 @@ function customerCount() {
   $("#itemCount").text(itemCount);
 }
 
-// Order Count
+// Load order count
 function orderCount() {
   const orderCount = orderDatabase.length.toString();
   $("#orderCount").text(orderCount);

@@ -1,16 +1,22 @@
+//========================================================================================
+/*                                 Startup Initialization                               */
+//========================================================================================
+
 initializeNextOrderId();
 initializeCurrentDate();
 initializeOrderComboBoxes();
+orderCount();
 
-// ----------------------- Validations & Form Control -----------------------
+//========================================================================================
+/*                               Validations & Form Control                             */
+//========================================================================================
 
-// Remove Item from Order Table
-$("#order-detail-tbody").on("click", ".delete-btn", function () {
-  $(this).closest("tr").remove(); // Only removes the table row when the delete button is clicked
+// Event delegation setup
+$("#order-detail-tbody").on("click", ".btn-danger", function () {
+  $(this).closest("tr").remove(); // Only removes the tr containing the clicked button
   initializeTotalAndSubtotal();
 });
 
-// Real Time Validation
 $('#tab-content-3 input[type="date"], #tab-content-3 input[pattern]').on(
   "input change",
   realTimeValidate
@@ -24,9 +30,10 @@ $("#txt-order-discount").on("input", function () {
 
 $("#txt-order-cash").on("input", validateOrderCash);
 
-// ----------------------- Other Functions -----------------------
+//========================================================================================
+/*                                 Other Functions                                      */
+//========================================================================================
 
-// Initialize next order ID
 function initializeNextOrderId() {
   const prevCode =
     orderDatabase.length > 0
@@ -37,16 +44,14 @@ function initializeNextOrderId() {
   $("#txt-order-id").removeClass("is-invalid").addClass("is-valid");
 }
 
-// Initialize current date
 function initializeCurrentDate() {
   const currentDate = new Date().toISOString().split("T")[0];
   $("#txt-order-date").val(currentDate);
   $("#txt-order-date").removeClass("is-invalid").addClass("is-valid");
 }
 
-// Initialize customer and item combo boxes
 function initializeOrderComboBoxes() {
-  // Keeping the first option as default
+  // Clear existing options first (keeping the first empty/default option if exists)
   $("#select-customer-id").find("option:not(:first)").remove();
   $("#select-item-code").find("option:not(:first)").remove();
 
@@ -61,7 +66,6 @@ function initializeOrderComboBoxes() {
   });
 }
 
-// Initialize total and subtotal
 function initializeTotalAndSubtotal() {
   const rows = $("#order-detail-tbody tr").toArray();
   const total = rows.reduce((acc, row) => {
@@ -94,12 +98,10 @@ function initializeTotalAndSubtotal() {
   }
 }
 
-// Get order by ID
 function getOrderById(id) {
   return orderDatabase.find((o) => o.orderId === id);
 }
 
-// Append to order table
 function appendToOrderTable(orderDetail) {
   const item = getItemByCode(orderDetail.itemCode);
   const existingRow = $(
@@ -132,8 +134,8 @@ function appendToOrderTable(orderDetail) {
                 <td>${parseFloat(item.price).toFixed(2)}</td>
                 <td>${orderDetail.qty}</td>
                 <td>${parseFloat(item.price * orderDetail.qty).toFixed(2)}</td>
-                <td><button class="btn text-danger shadow-sm py-0 btn-sm border-0 delete-btn">
-                        <i class="fa-solid fa-trash-can"></i>
+                <td><button class="btn text-danger btn-sm delete-btn">
+                        <i class="fa-regular fa-trash-can"></i>
                     </button>
                 </td>
             </tr>
@@ -144,7 +146,6 @@ function appendToOrderTable(orderDetail) {
   }
 }
 
-// Validate order quantity
 function validateOrderQuantity() {
   const input = $(this);
   const qty = parseInt(input.val());
@@ -180,7 +181,6 @@ function validateOrderQuantity() {
   }
 }
 
-// Validate order cash
 function validateOrderCash() {
   const input = $(this);
   const cash = parseFloat($(this).val());
