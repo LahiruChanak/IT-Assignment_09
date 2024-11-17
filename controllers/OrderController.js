@@ -1,18 +1,12 @@
-//========================================================================================
-/*                                 Startup Initialization                               */
-//========================================================================================
-
 initializeNextOrderId();
 initializeCurrentDate();
 initializeOrderComboBoxes();
 orderCount();
 
-//========================================================================================
-/*                               Validations & Form Control                             */
-//========================================================================================
+// ------------------------------------ Validations & Form Control ----------------------------
 
 // Event delegation setup
-$("#order-detail-tbody").on("click", ".btn-danger", function () {
+$("#order-detail-tbody").on("click", ".delete-btn", function () {
   $(this).closest("tr").remove(); // Only removes the tr containing the clicked button
   initializeTotalAndSubtotal();
 });
@@ -30,10 +24,9 @@ $("#txt-order-discount").on("input", function () {
 
 $("#txt-order-cash").on("input", validateOrderCash);
 
-//========================================================================================
-/*                                 Other Functions                                      */
-//========================================================================================
+// ------------------------------------ Other Functions ------------------------------------
 
+// Initialize Next Order ID
 function initializeNextOrderId() {
   const prevCode =
     orderDatabase.length > 0
@@ -44,12 +37,14 @@ function initializeNextOrderId() {
   $("#txt-order-id").removeClass("is-invalid").addClass("is-valid");
 }
 
+// Initialize Current Date
 function initializeCurrentDate() {
   const currentDate = new Date().toISOString().split("T")[0];
   $("#txt-order-date").val(currentDate);
   $("#txt-order-date").removeClass("is-invalid").addClass("is-valid");
 }
 
+// Initialize Order Combo Boxes
 function initializeOrderComboBoxes() {
   // Clear existing options first (keeping the first empty/default option if exists)
   $("#select-customer-id").find("option:not(:first)").remove();
@@ -66,6 +61,7 @@ function initializeOrderComboBoxes() {
   });
 }
 
+// Initialize Total and Subtotal
 function initializeTotalAndSubtotal() {
   const rows = $("#order-detail-tbody tr").toArray();
   const total = rows.reduce((acc, row) => {
@@ -98,10 +94,12 @@ function initializeTotalAndSubtotal() {
   }
 }
 
+// Get Order by ID
 function getOrderById(id) {
   return orderDatabase.find((o) => o.orderId === id);
 }
 
+// Append to Order Table
 function appendToOrderTable(orderDetail) {
   const item = getItemByCode(orderDetail.itemCode);
   const existingRow = $(
@@ -146,6 +144,7 @@ function appendToOrderTable(orderDetail) {
   }
 }
 
+// Validate Order Quantity
 function validateOrderQuantity() {
   const input = $(this);
   const qty = parseInt(input.val());
@@ -181,6 +180,7 @@ function validateOrderQuantity() {
   }
 }
 
+// Validate Order Cash
 function validateOrderCash() {
   const input = $(this);
   const cash = parseFloat($(this).val());
@@ -208,7 +208,7 @@ function validateOrderCash() {
   }
 }
 
-// ----------------------- CRUD Operations -----------------------
+// ------------------------------------ CRUD Operations ------------------------------------
 
 // Save Order
 $("#order-purchase-btn").on("click", function () {
@@ -275,7 +275,7 @@ $("#order-purchase-btn").on("click", function () {
   }
 });
 
-// Select Customer (Load Customer Details)
+// Select Customer to Load Customer Details
 $("#select-customer-id, #txt-customer-id").on("input change", function () {
   const customerId = $(this).val();
   const customer = getCustomerById(customerId);
@@ -299,7 +299,7 @@ $("#select-customer-id, #txt-customer-id").on("input change", function () {
   }
 });
 
-// Select Item (Load Item Details)
+// Select Item to Load Item Details
 $("#select-item-code, #txt-item-code").on("input change", function () {
   const itemCode = $(this).val();
   const item = getItemByCode(itemCode);

@@ -3,12 +3,12 @@ loadAllCustomers();
 loadCount();
 
 function initializeNextCustomerId() {
-  // Initialize Customer ID in New Customer
-  const prevId =
+  // Set up Customer ID for New Customer
+  const previousId =
     customerDatabase.length > 0
       ? customerDatabase[customerDatabase.length - 1].id
       : "C000";
-  const nextId = generateNextID(prevId);
+  const nextId = generateNextID(previousId);
   $("#txt-save-cid").val(nextId);
   $("#txt-save-cid").removeClass("is-invalid").addClass("is-valid");
 }
@@ -21,7 +21,7 @@ function getCustomerByContactNo(contactNo) {
   return customerDatabase.filter((c) => c.contactNo === contactNo);
 }
 
-// Function to append customer to table
+// Function to add customer to table
 function appendToCustomerTable(customer) {
   $("#customer-tbody").append(`
         <tr>
@@ -33,7 +33,7 @@ function appendToCustomerTable(customer) {
     `);
 }
 
-// Function to get customer based on option
+// Function to retrieve customer based on option
 function getCustomerByOption(option, value) {
   if (option === "ID") return getCustomerById(value);
   if (option === "Name") return getCustomerByName(value);
@@ -41,7 +41,7 @@ function getCustomerByOption(option, value) {
   return null;
 }
 
-// Function to load all customers to the table
+// Function to load all customers into the table
 function loadAllCustomers() {
   $("#customer-tbody").empty();
   for (const customer of customerDatabase) {
@@ -59,9 +59,7 @@ function sortCustomerDatabaseById() {
   });
 }
 
-//========================================================================================
-/*                                CRUD Operations                                       */
-//========================================================================================
+// -------------------------------------- CRUD Operations --------------------------------------
 
 // Save Customer
 $("#save-customer").on("submit", function (event) {
@@ -97,7 +95,7 @@ $("#save-customer").on("submit", function (event) {
   }
 });
 
-// Update Customer (Load Customer Details)
+// Update Customer to Load Customer Details
 $("#txt-update-cid").on("input", function (event) {
   if (customerDatabase.some((c) => c.id === $(this).val())) {
     const customer = getCustomerById($(this).val());

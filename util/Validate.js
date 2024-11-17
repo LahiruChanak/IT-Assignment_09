@@ -2,7 +2,7 @@ function realTimeValidate() {
     const input = $(this);
     const value = input.val();
 
-    // Skip if it's the order quantity input (handled separately)
+    // Skip if it's the order quantity input that is handled separately
     if (input.attr('id') === 'txt-order-qty') {
         return;
     }

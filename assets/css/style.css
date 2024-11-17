@@ -58,6 +58,7 @@ main {
 
 textarea {
   resize: none;
+  box-shadow: none !important;
 }
 
 .nav-item a {
@@ -115,54 +116,4 @@ td {
 #success-toast,
 #error-toast {
   z-index: 1070 !important;
-}
-
-@media (min-width: 992px) {
-  .order-search-box {
-    height: calc(390px + 390px + 1rem) !important;
-  }
-
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-
-  .order-btns {
-    justify-content: center;
-    position: absolute;
-    bottom: 0;
-  }
-
-  .button-set button {
-    font-size: 0.9rem;
-    width: 100px;
-  }
-
-  .purchase-btn {
-    width: calc(100% - 2rem);
-    position: absolute;
-    bottom: 0;
-  }
-
-  #add-item-btn {
-    margin-top: 30px;
-  }
-}
-
-@media (max-width: 991px) {
-  .order-btns {
-    justify-content: center;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .button-set button {
-    padding: 5px 10px !important;
-    width: 75px;
-  }
-
-  .purchase-btn {
-    width: 100%;
-  }
 }

@@ -41,10 +41,9 @@ $("#close-updatei-btn, #close-updatei-icon").on("click", function () {
   resetForm("#update-item", "#update-item input");
 });
 
-//========================================================================================
-/*                                 Other Functions                                      */
-//========================================================================================
+// ------------------------------------ Other Functions ------------------------------------
 
+// Initialize Next Item Code
 function initializeNextItemCode() {
   const prevCode =
     itemDatabase.length > 0
@@ -70,12 +69,14 @@ function appendToItemTable(item) {
     `);
 }
 
+// Get Item by Option
 function getItemByOption(option, value) {
   if (option === "Code") return getItemByCode(value);
   if (option === "Name") return getItemByName(value);
   return null;
 }
 
+// Load All Items
 function loadAllItems() {
   $("#item-tbody").empty();
   for (const item of itemDatabase) {
@@ -83,6 +84,7 @@ function loadAllItems() {
   }
 }
 
+// Sort Item Database by Code
 function sortItemDatabaseByCode() {
   itemDatabase.sort(function (a, b) {
     const codeA = parseInt(a.code.replace("I", ""), 10);
@@ -91,9 +93,7 @@ function sortItemDatabaseByCode() {
   });
 }
 
-//========================================================================================
-/*                                CRUD Operations                                       */
-//========================================================================================
+// ------------------------------------ CRUD Operations ------------------------------------
 
 // Save Item
 $("#save-item").on("submit", function (event) {
@@ -125,7 +125,7 @@ $("#save-item").on("submit", function (event) {
   }
 });
 
-// Update Item (Load Item Details)
+// Update Item to Load Item Details
 $("#txt-update-icode").on("input", function (event) {
   if (itemDatabase.some((i) => i.code === $(this).val())) {
     const item = getItemByCode($(this).val());

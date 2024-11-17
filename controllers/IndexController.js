@@ -2,7 +2,7 @@ let currentSection = "home";
 const activeLink = document.querySelectorAll("#nav-bar .nav-link");
 
 function logout() {
-  window.location.href = "/indexLogin.html";
+  window.location.href = "/index.html";
 }
 
 function showSection(section) {
