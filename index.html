@@ -1043,6 +1043,47 @@
               ></tbody>
             </table>
           </div>
+
+          <!-- Order Confirmation Section -->
+          <div
+            class="modal fade"
+            id="confirm-model"
+            tabindex="-1"
+            aria-labelledby="confirmModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content py-3">
+                <div class="modal-header d-flex flex-column align-items-center">
+                  <div
+                    class="mb-3 py-2 px-2 bg-info-subtle rounded-circle d-flex text-info fs-4"
+                  >
+                    <i class="fa-solid fa-question mx-1"></i>
+                  </div>
+                  <h5 class="modal-title" id="confirmModalLabel">
+                    Place Order Confirmation
+                  </h5>
+                </div>
+                <div class="modal-body text-center">Message</div>
+                <div class="modal-footer d-flex justify-content-center gap-3">
+                  <button
+                    type="button"
+                    class="btn btn-secondary bg-secondary-subtle text-black border-0 rounded-pill"
+                    data-bs-dismiss="modal"
+                  >
+                    No, Don't
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-info text-black rounded-pill"
+                    id="confirm-btn"
+                  >
+                    Yes, Place!
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

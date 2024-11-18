@@ -208,7 +208,7 @@ function validateOrderCash() {
   }
 }
 
-// ------------------------------------ CRUD Operations ------------------------------------
+// ------------------------------------ Order Placement Operations ------------------------------------
 
 // Save Order
 $("#order-purchase-btn").on("click", function () {
@@ -219,13 +219,6 @@ $("#order-purchase-btn").on("click", function () {
     .every((element) => $(element).hasClass("is-valid"));
 
   if (isValidated) {
-    const orderId = $("#txt-order-id").val();
-    const date = $("#txt-order-date").val();
-    const customerId = $("#txt-customer-id").val();
-    const discount = parseFloat($("#txt-order-discount").val());
-    const cash = parseFloat($("#txt-order-cash").val());
-    const balance = parseFloat($("#txt-order-balance").val());
-
     const orderDetails = $("#order-detail-tbody tr")
       .toArray()
       .map((row) => {
@@ -236,34 +229,55 @@ $("#order-purchase-btn").on("click", function () {
         );
       });
 
-    const order = new Order(
-      orderId,
-      date,
-      customerId,
-      discount,
-      cash,
-      balance,
-      orderDetails
-    );
-
     if (orderDetails.length > 0) {
+      const orderId = $("#txt-order-id").val();
+
       if (!orderDatabase.some((o) => o.orderId === orderId)) {
-        // Save order to database
-        orderDatabase.push(order);
+        // Show confirmation modal
+        $("#confirm-model .modal-body").text(
+          "Are you sure you want to place this order?"
+        );
+        $("#confirm-model").modal("show");
 
-        // Update item quantities
-        for (const detail of orderDetails) {
-          const item = getItemByCode(detail.itemCode);
-          item.qty -= detail.qty;
-          itemDatabase[itemDatabase.findIndex((i) => i.code === item.code)] =
-            item;
-        }
+        // Handle confirmation
+        $("#confirm-btn").one("click", function () {
+          const date = $("#txt-order-date").val();
+          const customerId = $("#txt-customer-id").val();
+          const discount = parseFloat($("#txt-order-discount").val());
+          const cash = parseFloat($("#txt-order-cash").val());
+          const balance = parseFloat($("#txt-order-balance").val());
 
-        // Update UI
-        showToast("success", "Order saved successfully!");
+          const order = new Order(
+            orderId,
+            date,
+            customerId,
+            discount,
+            cash,
+            balance,
+            orderDetails
+          );
 
-        // Update homepage counts
-        orderCount();
+          // Save order to database
+          orderDatabase.push(order);
+
+          // Update item quantities
+          for (const detail of orderDetails) {
+            const item = getItemByCode(detail.itemCode);
+            item.qty -= detail.qty;
+            itemDatabase[itemDatabase.findIndex((i) => i.code === item.code)] =
+              item;
+          }
+
+          // Clear all order fields
+          clearOrderFields();
+
+          // Update UI
+          showToast("success", "Order placed successfully!");
+          $("#confirm-model").modal("hide");
+
+          // Update homepage counts
+          orderCount();
+        });
       } else {
         showToast("error", "Order already exists!");
       }
@@ -356,3 +370,35 @@ $("#txt-order-discount").on("input", function () {
 
   initializeTotalAndSubtotal();
 });
+
+// Clear Order Fields after Order Placement
+function clearOrderFields() {
+  // Clear customer fields
+  $(
+    "#txt-customer-id, #txt-customer-name, #txt-customer-address, #txt-customer-cno"
+  )
+    .val("")
+    .removeClass("is-valid is-invalid");
+  $("#select-customer-id").val("");
+
+  // Clear order details
+  $("#order-detail-tbody").empty();
+  $("#lbl-total").text("Total: 0.00Rs/=");
+  $("#lbl-subtotal").text("SubTotal: 0.00Rs/=");
+
+  // Clear payment fields
+  $("#txt-order-discount, #txt-order-cash, #txt-order-balance")
+    .val("")
+    .removeClass("is-valid is-invalid");
+
+  // Clear item selection fields
+  $(
+    "#select-item-code, #txt-item-code, #txt-item-name, #txt-item-price, #txt-item-qty, #txt-order-qty"
+  )
+    .val("")
+    .removeClass("is-valid is-invalid");
+
+  // Initialize new order
+  initializeNextOrderId();
+  initializeCurrentDate();
+}
