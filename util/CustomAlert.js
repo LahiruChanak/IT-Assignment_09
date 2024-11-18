@@ -1,5 +1,5 @@
 function showToast(type, message) {
-    // Hide any existing toasts first
+    // Hide existing toasts
     $('.toast').each(function() {
         const toast = bootstrap.Toast.getInstance(this);
         if (toast) {
@@ -7,7 +7,7 @@ function showToast(type, message) {
         }
     });
     
-    // Set the toast content based on type and message
+    // Set the toast content type and message
     const toast = (type === 'success') ? $('#success-toast') : $('#error-toast');
     toast.find('.toast-body').text(message);
     

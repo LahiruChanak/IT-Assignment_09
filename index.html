@@ -1093,33 +1093,32 @@
         aria-hidden="true"
       >
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
+          <div class="modal-content py-3">
+            <div class="modal-header d-flex flex-column align-items-center">
+              <div
+                class="mb-3 py-2 px-2 bg-danger-subtle rounded-circle d-flex text-danger fs-4"
+              >
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
               <h5 class="modal-title" id="confirmDeleteModalLabel">
-                Confirm Deletion
+                Delete Confirmation
               </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
             </div>
-            <div class="modal-body">Message</div>
-            <div class="modal-footer">
+            <div class="modal-body text-center">Message</div>
+            <div class="modal-footer d-flex justify-content-center gap-3">
               <button
                 type="button"
-                class="btn btn-secondary"
+                class="btn btn-secondary bg-secondary-subtle text-black border-0 rounded-pill"
                 data-bs-dismiss="modal"
               >
-                Cancel
+                No, Keep
               </button>
               <button
                 type="button"
-                class="btn btn-danger"
+                class="btn btn-danger rounded-pill"
                 id="confirm-delete-btn"
               >
-                Delete
+                Yes, Delete!
               </button>
             </div>
           </div>
@@ -1190,11 +1189,31 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- jQuery -->
+    <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <!-- Custom Scripts -->
-    <script src="/util/ScriptLoader.js"></script>
-    <script src="/util/SalesChart.js"></script>
+    <!-- ///////////////////// Custom Scripts ///////////////////// -->
+
+    <!-- DB -->
+    <script src="/db/DB.js"></script>
+
+    <!-- Util -->
+    <script src="/util/GenerateNextID.js"></script>
+    <script src="/util/Validate.js"></script>
+    <script src="/util/CommonFunctions.js"></script>
+    <script src="/util/CustomAlert.js"></script>
+
+    <!-- Models -->
+    <script src="/models/customer.js"></script>
+    <script src="/models/order.js"></script>
+    <script src="/models/OrderDetail.js"></script>
+    <script src="/models/item.js"></script>
+
+    <!-- Controllers -->
+    <script src="/controllers/IndexController.js"></script>
+    <script src="/controllers/HomepageController.js"></script>
+    <script src="/controllers/CustomerController.js"></script>
+    <script src="/controllers/OrderController.js"></script>
+    <script src="/controllers/ItemController.js"></script>
   </body>
 </html>

@@ -2,17 +2,17 @@ function realTimeValidate() {
     const input = $(this);
     const value = input.val();
 
-    // Skip if it's the order quantity input that is handled separately
+    // Skip processing for the order quantity input
     if (input.attr('id') === 'txt-order-qty') {
         return;
     }
 
-    // Check if this is a date input
+    // Determine if the input is a date type
     if (input.attr('type') === 'date') {
         if (value) {
             const selectedDate = new Date(value);
             const currentDate = new Date();
-            // Reset time part for accurate date comparison
+            // Set time to midnight for accurate comparison
             currentDate.setHours(0, 0, 0, 0);
             
             if (selectedDate <= currentDate) {
@@ -27,17 +27,17 @@ function realTimeValidate() {
             input.next().show();
         }
     } else {
-        // For non-date inputs, use pattern validation
-        const pattern = new RegExp(input.attr('pattern')); // Get the pattern from the input field
+        // Validate non-date inputs against a pattern
+        const pattern = new RegExp(input.attr('pattern')); // Retrieve the pattern from the input
 
         if (pattern.test(value)) {
-            // If the input matches the pattern, show valid feedback
+            // Provide valid feedback if the input matches the pattern
             input.removeClass('is-invalid').addClass('is-valid');
-            input.next().hide(); // Hide error message
+            input.next().hide(); // Hide the error message
         } else {
-            // If the input doesn't match the pattern, show invalid feedback
+            // Provide invalid feedback if the input does not match the pattern
             input.removeClass('is-valid').addClass('is-invalid');
-            input.next().show(); // Show error message
+            input.next().show(); // Display the error message
         }
     }
 }
